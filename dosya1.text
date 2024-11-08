@@ -1,0 +1,219 @@
+Ana içeriğe atla
+Learn
+Oturum açın
+Visual Studio IDE
+ Bu konunun bazı bölümleri makine veya yapay zeka tarafından çevrilebilir.
+
+Arama yap
+Başlığa göre filtrele
+Bölüm 1: Kapsayıcı uygulaması oluşturma
+Bölüm 2: Uygulamaları güncelleştirme ve paylaşma
+3. Bölüm: Uygulamanızda verileri kalıcı hale taşıma
+Çok kapsayıcılı uygulamalar oluşturma
+Learn 
+Öğretici: Visual Studio Code ile Docker uygulaması oluşturma
+Makale
+25.08.2023
+10 katılımcı
+Bu makalede
+Önkoşullar
+Kapsayıcı oluşturma
+Uygulama için kapsayıcı görüntüsü oluşturma
+Uygulama kapsayıcınızı başlatma
+Sonraki adımlar
+Bu öğretici, Visual Studio Code (VS Code) ile kullanılmak üzere Docker'ı tanıtan dört bölümden oluşan bir serinin başlangıcıdır. Docker Compose ile Docker kapsayıcıları oluşturmayı ve çalıştırmayı, verileri kalıcı hale getirmeyi ve birden çok kapsayıcıyı yönetmeyi öğreneceksiniz.
+
+VS Code, yerel bir Docker Desktop hizmetiyle çalışmanızı sağlayan bir Docker uzantısı sunar. Docker Desktop bilgisayarınızda çalışır ve uygulama derlemeye ve çalıştırmaya yönelik bir platform sağlayan sıkıştırılmış sanallaştırılmış ortamlar olan yerel kapsayıcılarınızı yönetir. Kapsayıcılar, tam bir işletim sisteminin boyutunu ve ek yükünü gerektirmez.
+
+Bu ilk öğreticide şunların nasıl yapılacağını öğreneceksiniz:
+
+Docker kapsayıcısı oluşturun.
+Kapsayıcı görüntüsü oluşturma.
+Bir uygulama kapsayıcısı başlatın.
+Önkoşullar
+Visual Studio Code yüklü.
+Docker VS Code Uzantısı yüklü.
+Docker Desktop , Linux kapsayıcılarını kullanacak şekilde yapılandırıldı.
+Docker Hub hesabı. Ücretsiz bir hesap oluşturabilirsiniz.
+Öğretici, Linux kapsayıcılarını kullanacak şekilde yapılandırılmış Windows 10 veya üzeri ve Docker Desktop ile çalışır.
+
+Kapsayıcı oluşturma
+Kapsayıcı, bilgisayarınızdaki bir işlemdir. Konak bilgisayardaki diğer tüm işlemlerden yalıtılmış. Bu yalıtımda çekirdek ad alanları ve denetim grupları kullanılır.
+
+Kapsayıcı yalıtılmış bir dosya sistemi kullanır. Bu özel dosya sistemi bir kapsayıcı görüntüsü tarafından sağlanır. Görüntü, tüm bağımlılıklar, yapılandırma, betikler ve ikili dosyalar gibi bir uygulamayı çalıştırmak için gereken her şeyi içerir. Görüntü ayrıca kapsayıcı için ortam değişkenleri, çalıştırılacak varsayılan komut ve diğer meta veriler gibi başka yapılandırmalar da içerir.
+
+VS Code için Docker uzantısını yükledikten sonra VS Code'da kapsayıcılarla çalışabilirsiniz. Docker bölmesindeki bağlam menülerine ek olarak, bir komut satırı penceresi açmak için Terminal>Yeni Terminal'i seçebilirsiniz. Bash penceresinde de komut çalıştırabilirsiniz. Belirtilmediği sürece, Bash olarak etiketlenen tüm komutlar bir Bash penceresinde veya VS Code terminalinde çalıştırılabilir.
+
+Docker'ı Linux kapsayıcı moduna ayarlayın. Şu anda Windows kapsayıcılarına ayarlanmışsanız Linux kapsayıcılarına geçmek için Docker Desktop çalışırken sistem tepsisindeki Docker simgesine sağ tıklayın ve Linux kapsayıcılarına geç'i seçin.
+
+VS Code'da Terminal>Yeni Terminal'i seçin.
+
+Terminal penceresinde veya Bash penceresinde bu komutu çalıştırın.
+
+Bash
+
+Kopyala
+docker run -d -p 80:80 docker/getting-started
+Bu komut aşağıdaki parametreleri içerir:
+
+-d Kapsayıcıyı ayrılmış modda, arka planda çalıştırın.
+-p 80:80 Konağın 80 numaralı bağlantı noktasını kapsayıcıdaki 80 numaralı bağlantı noktasına eşleyin.
+docker/getting-started Kullanılacak görüntüyü belirtir.
+ İpucu
+
+Tam komutu kısaltmak için tek karakterli bayrakları birleştirebilirsiniz. Örneğin, yukarıdaki komut şöyle yazılabilir:
+
+Bash
+
+Kopyala
+docker run -dp 80:80 docker/getting-started
+VS Code'da sol taraftaki Docker simgesini seçerek Docker uzantısını görüntüleyin.
+
+Screenshot shows the Docker extension with the docker/getting-started tutorial running.
+
+Docker VS Code Uzantısı, bilgisayarınızda çalışan kapsayıcıları gösterir. Kapsayıcı günlüklerine erişebilir ve durdurma ve kaldırma gibi kapsayıcı yaşam döngüsünü yönetebilirsiniz.
+
+Bu örnekte modest_shockley kapsayıcı adı rastgele oluşturulur. Sizinki farklı bir ada sahip olacak.
+
+Bağlam menüsünü açmak için docker/getting-started öğesine sağ tıklayın. Tarayıcıda Aç’ı seçin.
+
+Bunun yerine bir tarayıcı açın ve girin http://localhost/tutorial/.
+
+DockerLabs hakkında yerel olarak barındırılan bir sayfa görürsünüz.
+
+Bağlam menüsünü açmak için docker/getting-started öğesine sağ tıklayın. Bu kapsayıcıyı kaldırmak için Kaldır'ı seçin.
+
+Komut satırını kullanarak kapsayıcıyı kaldırmak için, kapsayıcı kimliğini almak için şu komutu çalıştırın:
+
+Bash
+
+Kopyala
+docker ps
+Ardından kapsayıcıyı durdurun ve kaldırın:
+
+Bash
+
+Kopyala
+docker stop <container-id>
+docker rm <container-id>
+Tarayıcınızı yenileyin. Bir dakika önce gördüğünüz Başlarken sayfası yok.
+
+Uygulama için kapsayıcı görüntüsü oluşturma
+Bu öğreticide basit bir Todo uygulaması kullanılır.
+
+Screenshot shows the sample application with several items added and a text box and button to add new items.
+
+Uygulama, iş öğeleri oluşturmanıza ve bunları tamamlandı olarak işaretlemenize veya silmenize olanak tanır.
+
+Uygulamayı oluşturmak için bir Dockerfile oluşturun. Dockerfile, kapsayıcı görüntüsü oluşturmak için kullanılan metin tabanlı yönergeler betiğidir.
+
+Docker Başlarken Öğreticisi deposuna gidin ve Kod>İndirme ZIP'i seçin. İçeriği yerel bir klasöre ayıklayın.
+
+Screenshot shows part of the Github site, with the green Code button and Download ZIP option highlighted.
+
+VS Code'da Dosya>Klasör Aç'ı seçin. Ayıklanan projede uygulama klasörüne gidin ve bu klasörü açın. package.json adlı bir dosya ve src ve spec adlı iki klasör görmeniz gerekir.
+
+Screenshot of Visual Studio Code showing the package.json file open with the app loaded.
+
+Aşağıdaki içeriklere sahip package.json dosyasıyla aynı klasörde Dockerfile adlı bir dosya oluşturun.
+
+Dockerfile
+
+Kopyala
+FROM node:20-alpine
+RUN apk add --no-cache python3 g++ make
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+CMD ["node", "/app/src/index.js"]
+ Not
+
+Dosyanın gibi .txtbir dosya uzantısı olmadığından emin olun.
+
+Dosya gezgininde, VS Code'un sol tarafındaki Dockerfile dosyasına sağ tıklayın ve ardından Görüntü Oluştur'a tıklayın. Metin giriş kutusuna resmin etiketi olarak başlarken yazın.
+
+Etiket, görüntü için kolay bir addır.
+
+Komut satırından kapsayıcı görüntüsü oluşturmak için aşağıdaki komutu kullanın.
+
+Bash
+
+Kopyala
+docker build -t getting-started .
+ Not
+
+Dış Bash penceresinde, bu komutu çalıştırmak için app Dockerfile dosyasını içeren klasöre gidin.
+
+Yeni bir kapsayıcı görüntüsü oluşturmak için Dockerfile'ı kullandınız. Birçok "katmanın" indirildiğini fark etmiş olabilirsiniz. Dockerfile görüntüden node:20-alpine başlar. Bu görüntü bilgisayarınızda olmadığı sürece, bu görüntünün indirilmesi gerekiyordu.
+
+Görüntü indirildikten sonra Dockerfile uygulamanızı kopyalar ve uygulamanızın bağımlılıklarını yüklemek için kullanıryarn. CMD Dockerfile içindeki değer, bu görüntüden bir kapsayıcı başlatılırken çalıştırılacak varsayılan komutu belirtir.
+
+. Komutun sonunda docker docker build geçerli dizinde Dockerfile araması gerektiğini bildirir.
+
+Uygulama kapsayıcınızı başlatma
+Artık bir görüntüye sahip olduğunuz için uygulamayı çalıştırabilirsiniz.
+
+Kapsayıcınızı başlatmak için aşağıdaki komutu kullanın.
+
+Bash
+
+Kopyala
+docker run -dp 3000:3000 getting-started
+-d parametresi, kapsayıcıyı arka planda ayrılmış modda çalıştırdığınızı gösterir. değeri, -p 3000 konak bağlantı noktası ile 3000 kapsayıcı bağlantı noktası arasında bir eşleme oluşturur. Bağlantı noktası eşlemesi olmadan uygulamaya erişemezsiniz.
+
+Birkaç saniye sonra VS Code'daki Docker alanında, KAPSAYICILAR'ın altında başlarken'e sağ tıklayın ve Tarayıcıda Aç'ı seçin. Bunun yerine web tarayıcınızı olarak http://localhost:3000açabilirsiniz.
+
+Uygulamanın çalıştığını görmeniz gerekir.
+
+Screenshot shows the sample app with no items and the text No items yet Add one above.
+
+Beklediğiniz gibi çalışıp çalışmadığını test etmek için bir veya iki öğe ekleyin. Öğeleri tamamlandı olarak işaretleyebilir ve öğeleri kaldırabilirsiniz. Ön ucunuz öğeleri arka uçta başarıyla depoluyor.
+
+Sonraki adımlar
+Bu öğreticiyi tamamladınız ve birkaç öğe içeren çalışan bir yapılacaklar listesi yöneticiniz var. Kapsayıcı görüntüleri oluşturmayı ve kapsayıcılı bir uygulama çalıştırmayı öğrendinsiniz.
+
+Bu öğretici serisine devam etmek için şimdiye kadar yaptığınız her şeyi koruyun. Ardından, bu serinin II. bölümünü deneyin:
+
+
+Sizin için yararlı olabilecek bazı kaynaklar şunlardır:
+
+Docker Bulut Tümleştirmesi
+Örnekler
+Geri Bildirim
+Bu sayfayı yararlı buldunuz mu?
+
+Ek kaynaklar
+Eğitim
+
+Modül
+
+Visual Studio Code ile geliştirici ortamı olarak bir Docker kapsayıcısı kullanma - Training
+
+Visual Studio Code Geliştirme Kapsayıcıları uzantısıyla tam özellikli kapsayıcı tabanlı bir geliştirme ortamı oluşturun ve yapılandırın. Kapsayıcıda herhangi bir klasör veya depoyu açın ve Visual Studio Code’un IntelliSense (tamamlanmalar), kod gezintisi ve hata ayıklama gibi tüm özellik kümesinden yararlanın.
+
+Belgeler
+
+VS Code'da Docker kapsayıcılarını kullanma
+
+VS Code için Docker Uzantısı'nı ayrıntılı olarak incelemenin zamanı geldi! Bu bölümde Docker Uzantısı'nın Dockerfile'ların iskelesini oluşturma, Docker Gezgini'nde gezinme ve hatta Docker Compose IntelliSense gibi bazı yeni özellikleri inceleme gibi temel özelliklerini kullanma konusunda size yol gösteririz. Kaynaklar: VS Code için Docker uzantısı
+
+Çok kapsayıcılı uygulamalar oluşturma (MySQL, Docker Compose)
+
+MySQL ve Docker Compose ile çok kapsayıcılı uygulamalar oluşturun ve Visual Studio'da projenizi ölçeklendirmek için kapsayıcıları kullanın.
+
+Öğretici: Visual Studio Code'da Docker uygulamalarını paylaşma
+
+Docker uygulamalarını Docker Visual Studio Code Uzantısı ile paylaşın: kapsayıcıyı oluşturun, kapsayıcı görüntüsünü oluşturun ve kapsayıcıyı başlatın.
+
+Öğretici: Adlandırılmış birimlerde verileri kalıcı hale getirme (VS Code)
+
+Adlandırılmış birimlerde verileri kalıcı hale getirme, konaktaki bağlama noktasını denetlemek için bağlama bağlamalarını ve Visual Studio Code ile Docker uygulamanızı katman (Yarn) kullanın.
+
+Tanımlama bilgilerini yönetin
+Önceki Sürümler
+Blog
+Katkıda Bulunun
+Gizlilik
+Kullanım Koşulları
+Ticari Markalar
+© Microsoft 2024
